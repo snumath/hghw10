@@ -1,0 +1,307 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage[inline]{enumitem}
+\usepackage{amsmath,amssymb,latexsym,amsfonts, amsthm}
+\usepackage[fontsize=13pt]{scrextend} % Font size
+% \usepackage{verbatim} % coding
+
+\usepackage[tracking]{microtype} % Font
+\usepackage[sc,osf]{mathpazo} % Font
+\usepackage{graphicx}
+\usepackage{lipsum}
+
+% \usepackage[all]{xy} % diagram
+
+% \usepackage{tikz} % diagram
+% \usepackage{tikz-cd} % diagram
+
+% \usetikzlibrary{arrows}
+% \usetikzlibrary{matrix}
+
+
+\makeatletter
+\renewenvironment{cases}[1][l]{\matrix@check\cases\env@cases{#1}}{\endarray\right.}
+\def\env@cases#1{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrace\def\arraystretch{1.2}%
+  \array{@{}#1@{\quad}l@{}}}
+\makeatother
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{2016-11988} % Top left header
+\chead{3341.202 Introduction to Mathematical Analysis} % Top center header
+\rhead{Lee Young Jae} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\newtheorem{lemma}{Lemma}
+
+
+\setcounter{secnumdepth}{0}
+
+
+\begin{document}
+\begin{titlepage}
+\centering
+{\scshape\LARGE Seoul National University \par}
+\vspace{1.5cm}
+{\huge\bfseries Introduction to\\Mathematical Analysis\par}
+\vspace{1cm}
+{\scshape\Large Assignment \# 10\par}
+
+\vspace{1cm}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{good.png}
+\end{figure}
+
+\vspace{1cm}
+
+\arrayrulewidth=1.2pt
+\begin{tabular}{p{2.5cm}p{2cm}}
+\centering
+& \\
+\cline{2-2}
+\vspace{-.73cm}
+My Score? & \\
+\end{tabular}
+
+
+
+\vfill
+\text{2016-11988}
+\vspace{.7cm}\par
+\textsc{\large Lee Young Jae}
+\vspace{.7cm}\par
+{\Large \today\par}
+\end{titlepage}
+
+\setlength{\parindent}{0cm}
+
+
+\begin{enumerate}[font = \Large\bfseries\itshape\space, leftmargin = 3mm, labelsep = 3mm]
+\item
+Show that the Cauchy-Schwarz inequality (see Definition 7.4.6 of the lecture) always holds in an inner product space.
+\begin{proof}
+$$
+\begin{aligned}
+\|f-tg\|^2
+&= \langle f-tg, f-tg \rangle\\
+&= \langle f,f \rangle - 2t\langle f,g \rangle + t^2 \langle g,g \rangle \geq 0 \enspace \forall t \in \mathbb{R}.
+\end{aligned}
+$$
+Therefore, its determinant $\langle f,g \rangle^2 - \langle f,f\rangle \langle g,g \rangle = \langle f,g \rangle^2 -\|f\|^2\|g\|^2  \leq 0$, and
+$|\langle f,g \rangle| \leq \|f\|\|g\|$.
+\end{proof}
+
+\item
+Let $(X,\mathcal{M}, \mu)$ be a measure space with $\mu(X) < \infty$ and let $1 \leq p < q < \infty$.
+Show that
+$$
+\mathcal{L}^q(X, \mu) \subset \mathcal{L}^p(X,\mu)
+$$
+and that
+$$
+\|f\|_p \leq \mu(X)^{\frac{1}{p} - \frac{1}{q}}\|f\|_q, \quad \mathcal{L}^q(X,\mu).
+$$
+\begin{proof}
+Let $\phi : x \mapsto x^{q/p}$.
+Then $\phi$ is a convex function.
+If $\mu(X) = 0$, then every function is measurable, hence $\mathcal{L}^q(X,\mu) = \mathcal{L}^p(X,\mu), \|f\|_p = \|f\|_q = 0$, so it is trivial.
+Let assume $\mu(X) \neq 0$, and let $\sigma = \frac{1}{\mu(X)}\mu$ so that $\sigma(X) = 1$ and $\mathcal{L}^p(X,\mu) = \mathcal{L}^p(X,\sigma)$.
+By applying Jensen's inequality, for $f \in \mathcal{L}^p(X,\mu) = \mathcal{L}^p(X,\sigma)$,
+$$
+\phi\left( \int \mu(X)f^p d\sigma\right) \leq \int \phi \circ \left(\mu(X) f^p\right) d\sigma < \infty.
+$$
+LHS = $\left(\mu(X)\right)^{q/p} \|f\|_p^q$ and RHS = $\mu(X)^{\frac{q}{p}} \|f\|_q^q$.
+Thus, $f \in \mathcal{L}^q(X,\mu)$.
+Taking $q$-root for each side, we get
+$$
+\|f\|_p \leq \mu(X)^{\frac 1p - \frac 1q} \|f\|_q.
+$$
+\end{proof}
+
+\item
+Show that the Gamma function is infinitely often differentiable and that
+$$
+\Gamma^{(n)}(x) = \int_0^\infty t^{x-1}e^{-t}(\ln t)^n dt, \quad n = 0,1,2,\cdots (x > 0).
+$$
+
+\textit{Hint}: Adapt Theorem 7.6.2 of the lecture to subsets of $\mathbb{R}^n$
+(here to $(0,\infty) \subset \mathbb{R}, n = 1$) and
+find integrable majorants for the derivative on $(0, 1)$ and on $(1, \infty)$.
+
+\begin{proof}
+Let $f : \mathbb{R}^+ \times I \rightarrow \mathbb{C}$ by $f(t,x) = t^{x-1}e^{-t}$.
+To adapt theorem 7.6.2, we need to check the followings:
+
+\begin{enumerate}[label=(\arabic*)]
+\item
+For any fixed $t \in \mathbb{R}^+, x \mapsto f(t,x)$ is differentiable on $I$.
+
+\item
+For any fixed $x \in I, t \mapsto f(t,x)$ is in $\mathcal{L}(\mathbb{R^+})$.
+
+\item
+There exists a function $F \in \mathcal{L}(\mathbb{R^+}), F : \mathbb{R}^+ \rightarrow [0,\infty)$ with
+$$
+\left| \frac{\partial f}{\partial x}(t,x) \right| \leq F(t) \enspace \forall (t,x) \in \mathbb{R^+} \times I.
+$$
+\end{enumerate}
+Then, $\Gamma : I \rightarrow \mathbb{R}$ is differentiable and $\Gamma'(x) = \int_0^\infty \frac{\partial f}{\partial x}(t,x) dt = t^{x-1}e^{-t}(\ln t) dt$.
+We will differ $I$ as $I = (0,1)$ and $I = (1,\infty)$ so that (1) to (3) holds with respect to $I$.
+
+\begin{enumerate}[label=(\arabic*)]
+\item
+Obvious, since $\frac{\partial f}{\partial x} = t^{x-1}e^{-t} \ln t$ is always defined.
+
+\item
+We will use the property that $\Gamma(x) = \int_0^\infty t^{x-1} e^{-x}dt$ is always well-defined except $x = 0, -1, -2 \cdots$.
+$\frac{\partial f}{\partial t} = t^{x-2}e^{-t} - t^{x-1}e^{-t}$ is always defined, and its $L^1$ norm is less than
+$\left|\int_0^\infty t^{x-2}e^{-t}dt\right| + \left|\int_0^\infty t^{x-1}e^{-t}dt \right| \leq |\Gamma(x-1)| + |\Gamma(x)|$ finite.
+
+\item
+Note that $0 < \ln t \leq t$ for $t > 1-\epsilon$ and $|\ln t| < \frac{1}{t}$ for $0 < t < 1$.
+Define
+$$F(t) =
+\begin{cases}
+\frac{1}{t}f(t) & \text{ for } t \in (0,1)\\
+tf(t) & \text{ for } t \in [1,\infty)
+\end{cases}
+.
+$$
+Then, $\left|\frac{\partial f}{\partial x}(t,x)\right| \leq F(t)$ for all $(t,x) \in \mathbb{R}^+ \times I$, and
+$$
+\int_0^\infty F(t)dt \leq \int_0^\infty t^{x-2}e^{-t}dt + \int_0^\infty t^{x}e^{-t}dt = \Gamma(x-1) + \Gamma(x+1) < \infty.
+$$
+Therefore, $F \in \mathcal{L}(\mathbb{R}^+)$.
+\end{enumerate}
+Since (1) to (3) are holds for any $x\in I$, we can adapt theorem 7.6.2.
+The problem is for $x = 1$ since $x \not\in (0,1)$ and $x \not\in (1,\infty)$.
+We will solve this problem by proving this lemma:
+
+\begin{lemma}
+Let $f : (a,b) \rightarrow \mathbb{R}$ be continuous.
+For fixed $x_0 \in (a,b)$, $f$ is differentiable for $(a,x_0)$ and $(x_0, b)$.
+If $\lim_{x\rightarrow x_0-}f'(x) = \lim_{x\rightarrow x_0+}f'(x)$, then $f$ is differentiable at $x_0$ and
+$f'(x_0) = \lim_{x\rightarrow x_0}f'(x)$.
+\end{lemma}
+\begin{proof}
+Let $\lim_{x\rightarrow x_0}f'(x) = c$. Then,
+$\lim_{\epsilon\searrow 0}\frac{f(x_0+\epsilon)-f(x_0)}{\epsilon} = \lim_{\epsilon'\searrow 0}f'(x_0+\epsilon') = c$, and
+$\lim_{\epsilon\nearrow 0}\frac{f(x_0+\epsilon)-f(x_0)}{\epsilon} = \lim_{\epsilon'\nearrow 0}f'(x_0+\epsilon') = c$.
+Therefore, $\lim_{\epsilon\rightarrow 0}\frac{f(x_0+\epsilon)-f(x_0)}{\epsilon}$ exists and its value is $c$.
+\end{proof}
+
+Now, we've proved the problem for $n = 1$.
+For $n > 1$, we can adapt the same strategy.
+\begin{enumerate}[label=(\arabic*)]
+\item
+For any fixed $t \in \mathbb{R}^+, x \mapsto \frac{\partial^n f}{\partial t^n}$ is differentiable on $I$.
+
+\item
+For any fixed $x \in I, t \mapsto \frac{\partial^n f}{\partial x^n}$ is in $\mathcal{L}(\mathbb{R^+})$.
+
+\item
+There exists a function $F \in \mathcal{L}(\mathbb{R^+}), F : \mathbb{R}^+ \rightarrow [0,\infty)$ with
+$$
+\left| \frac{\partial^{n+1} f}{\partial x^{n+1}}(t,x) \right| \leq F(t) \enspace \forall (t,x) \in \mathbb{R^+} \times I.
+$$
+\end{enumerate}
+And they are true since
+\begin{enumerate}[label=(\arabic*)]
+\item
+Obvious, since $\frac{\partial^{n+1} f}{\partial x^{n+1}} = t^{x-1}e^{-t} (\ln t)^{n+1}$ is always defined.
+
+\item
+We will use the property that $\Gamma(x) = \int_0^\infty t^{x-1} e^{-x}dt$ is always well-defined except $x = 0, -1, -2 \cdots$.
+$\frac{\partial^{n+1} f}{\partial t^{n+1}}$ is always defined inductively, and its $L^1$ norm is less than
+$|a_0 \Gamma(x)| + |a_1 \Gamma(x-1)| + \cdots + |a_{n+1} \Gamma(x-n-1)|$ is finite, for some constant $a_0, \cdots, a_n$.
+
+\item
+Note that $0 < \ln t \leq t$ for $t > 1-\epsilon$ and $|\ln t| < \frac{1}{t}$ for $0 < t < 1$.
+Define
+$$F(t) =
+\begin{cases}
+\frac{1}{t^{n+1}}f(t) & \text{ for } t \in (0,1)\\
+t^{n+1}f(t) & \text{ for } t \in [1,\infty)
+\end{cases}
+.
+$$
+Then, $\left|\frac{\partial^{n+1} f}{\partial x^{n+1}}(t,x)\right| \leq F(t)$ for all $(t,x) \in \mathbb{R}^+ \times I$, and
+$$
+\int_0^\infty F(t)dt \leq \int_0^\infty t^{x-n-3}e^{-t}dt + \int_0^\infty t^{x+1}e^{-t}dt = \Gamma(x-n-2) + \Gamma(x+n+2) < \infty.
+$$
+Therefore, $F \in \mathcal{L}(\mathbb{R}^+)$.
+\end{enumerate}
+The problem is for $x = 1, 2, \cdots$, and it can be solved by the lemma above.
+
+Therefore, by theorem 7.6.2,
+$$
+\Gamma^{(n)}(x) = \int_0^\infty t^{x-1}e^{-t}(\ln t)^n dt, \quad n = 0,1,2,\cdots (x > 0).
+$$
+
+\end{proof}
+
+\item
+Let $f : \mathbb{R}^2 \rightarrow \mathbb{R}$ be defined by
+$$
+f(x,y) = \frac{xy(x^2-y^2)}{(x^2+y^2)^3} \text{ for } (x,y) \neq 0, \quad f(0,0) = 0.
+$$
+Using Tonelli's Theorem show that
+$$
+\int_0^1 \int_0^2 |f(x,y)|dxdy = \infty.
+$$
+\begin{proof}
+Let $R = [0,2]\times[0,1]$. Since $|f(x,y)| \geq 0$ on $R$, by Tonelli's theorem
+$$
+\int_0^1 \int_0^2 |f(x,y)|dxdy = \iint_R |f| dm.
+$$
+Let $R' = \{(x,y) : 0 \leq x+y \leq 1, 0 \leq y \leq x \} \subset R$.
+Then, $\iint_{R'} |f|dm \leq \iint_R |f|dm$.
+Let $x-y = s, x+y = t$ so that $f(x,y) = \frac{\frac{t^2-s^2}{4} ts}{\left(\frac{t^2+s^2}{2}\right)^3}$ and $R' = \{ 0 \leq t \leq 1, 0 \leq s \leq t \}$.
+Then,
+$$
+\begin{aligned}
+\iint_{R'}|f|dm
+&= \int_0^1\int_0^t \frac{\frac{t^2-s^2}{4} ts}{\left(\frac{t^2+s^2}{2}\right)^3} dsdt\\
+&= \int_0^1\int_0^t \frac{2ts(t^2-s^2)}{(t^2+s^2)^3} dsdt\\
+&= \int_0^1\left[ \frac{ts^2}{(t^2+s^2)^2} \right]_0^tdt\\
+&= \int_0^1 \frac{t^3}{(t^2+t^2)^2}dt\\
+&= \int_0^1 \frac{1}{4t^3}dt\\
+&= \infty.
+\end{aligned}
+$$
+Therefore, $\int_0^1\int_0^2\frac{xy(x^2-y^2)}{(x^2+y^2)^3}dxdy=\infty$
+\end{proof}
+\end{enumerate}
+\end{document}
